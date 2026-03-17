@@ -70,15 +70,21 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <TargetName>part2</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <TargetName>part2</TargetName>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -88,11 +94,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
@@ -100,13 +106,28 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;UNICODE;_UNICODE;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Users\dan\Downloads\vcpkg\installed\x64-windows\include;C:\Users\dan\Downloads\vcpkg\installed\x64-windows\include\Qt6;C:\Users\dan\Downloads\vcpkg\installed\x64-windows\include\Qt6\QtCore;C:\Users\dan\Downloads\vcpkg\installed\x64-windows\include\Qt6\QtGui;C:\Users\dan\Downloads\vcpkg\installed\x64-windows\include\Qt6\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\dan\Downloads\vcpkg\installed\x64-windows\debug\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Qt6EntryPointd.lib;Qt6Widgetsd.lib;Qt6Guid.lib;Qt6Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>if exist "$(TargetDir)platforms" rmdir /s /q "$(TargetDir)platforms"
+mkdir "$(TargetDir)platforms"
+copy /Y "C:\Users\dan\Downloads\vcpkg\installed\x64-windows\debug\bin\Qt6Cored.dll" "$(TargetDir)"
+copy /Y "C:\Users\dan\Downloads\vcpkg\installed\x64-windows\debug\bin\Qt6Guid.dll" "$(TargetDir)"
+copy /Y "C:\Users\dan\Downloads\vcpkg\installed\x64-windows\debug\bin\Qt6Widgetsd.dll" "$(TargetDir)"
+copy /Y "C:\Users\dan\Downloads\vcpkg\installed\x64-windows\debug\Qt6\plugins\platforms\qwindowsd.dll" "$(TargetDir)platforms\"
+echo [Paths] &gt; "$(TargetDir)qt.conf"
+echo Plugins=platforms &gt;&gt; "$(TargetDir)qt.conf"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -114,16 +135,37 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;UNICODE;_UNICODE;QT_WIDGETS_LIB;QT_GUI_LIB;QT_CORE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/Zc:__cplusplus %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>C:\Users\dan\Downloads\vcpkg\installed\x64-windows\include;C:\Users\dan\Downloads\vcpkg\installed\x64-windows\include\Qt6;C:\Users\dan\Downloads\vcpkg\installed\x64-windows\include\Qt6\QtCore;C:\Users\dan\Downloads\vcpkg\installed\x64-windows\include\Qt6\QtGui;C:\Users\dan\Downloads\vcpkg\installed\x64-windows\include\Qt6\QtWidgets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\dan\Downloads\vcpkg\installed\x64-windows\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Qt6EntryPoint.lib;Qt6Widgets.lib;Qt6Gui.lib;Qt6Core.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>if exist "$(TargetDir)platforms" rmdir /s /q "$(TargetDir)platforms"
+mkdir "$(TargetDir)platforms"
+copy /Y "C:\Users\dan\Downloads\vcpkg\installed\x64-windows\bin\Qt6Core.dll" "$(TargetDir)"
+copy /Y "C:\Users\dan\Downloads\vcpkg\installed\x64-windows\bin\Qt6Gui.dll" "$(TargetDir)"
+copy /Y "C:\Users\dan\Downloads\vcpkg\installed\x64-windows\bin\Qt6Widgets.dll" "$(TargetDir)"
+copy /Y "C:\Users\dan\Downloads\vcpkg\installed\x64-windows\Qt6\plugins\platforms\qwindows.dll" "$(TargetDir)platforms\"
+echo [Paths] &gt; "$(TargetDir)qt.conf"
+echo Plugins=platforms &gt;&gt; "$(TargetDir)qt.conf"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="array_utils.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="mainwindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="array_utils.h" />
+    <ClInclude Include="mainwindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

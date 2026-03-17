@@ -1,6 +1,12 @@
-#include <iostream>
+#include "mainwindow.h"
 
-int main() {
-    std::cout << "lab2 part2 placeholder" << std::endl;
-    return 0;
+#include <QApplication>
+
+int main(int argc, char* argv[]) {
+    QApplication app(argc, argv);
+
+    MainWindow window;
+    window.show();
+
+    return app.exec();
 }
